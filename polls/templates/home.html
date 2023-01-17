@@ -43,16 +43,142 @@
 		</div>
 	</div>
 	<div>
+		<br>
+		<button id="0" type="button" style="border-radius: 4px;" >Daily (Monthly)</button>	
+		<button id="1" type="button" style="border-radius: 4px;" >Monthly (Cumulative)</button>
 		<canvas id="myChart"></canvas>
+
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 	<script>
-		const ctx = document.getElementById('myChart');
 		const lab = {{ adate| safe }}
-		console.log(lab)
 		const p = {{ price| safe }}
+		const mdate = {{ m_date| safe}}
+		const m_price = {{ m_price| safe}}
+		const DailyData = {
+			labels: lab,
+			datasets: [{
+			label: "Stock Daily Close Price",       
+			data: p,
+		  }]
+		}
+
+		const MontlyData = {
+			labels: mdate,
+			datasets: [{
+			label: "Stock Daily Close Price",       
+			data: m_price,
+		  }]
+		}
+
+		const defaultConfig = {
+			type: 'line',
+			data: DailyData,
+			options: {
+				responsive: true,
+			},
+			options: {
+				plugins: {
+					legend: {
+						display: true,
+						labels: {
+							color: 'rgb(255, 255, 255)'
+						}
+					}
+				},
+				scales: {
+					y: {
+						ticks: { color: 'white', beginAtZero: true }
+					},
+					x: {
+						ticks: { color: 'white', beginAtZero: true }
+					},
+					xAxes: [{
+						stacked: true,
+						grid: {
+							color: 'rgba(255,0,0,0.1)',
+							borderColor: 'red'
+						},
+						ticks: {
+							color: 'white',
+						}
+					}],
+					yAxes: [{
+						stacked: true,
+						grid: {
+							color: 'rgba(255,0,0,0.1)',
+							borderColor: 'red'
+						},
+						ticks: {
+							beginAtZero: true,
+							color: 'white',
+							callback: function (label, index, labels) {
+								return label + '%';
+							}
+						},
+					}]
+				}
+			},
+
+		}
+
+		const DailyConfig = {
+			type: 'line',
+			data: DailyData,
+			options: {
+				responsive: true,
+			},
+			options: {
+				plugins: {
+					legend: {
+						display: true,
+						labels: {
+							color: 'rgb(255, 255, 255)'
+						}
+					}
+				},
+				scales: {
+					y: {
+						ticks: { color: 'white', beginAtZero: true }
+					},
+					x: {
+						ticks: { color: 'white', beginAtZero: true }
+					},
+					xAxes: [{
+						stacked: true,
+						grid: {
+							color: 'rgba(255,0,0,0.1)',
+							borderColor: 'red'
+						},
+						ticks: {
+							color: 'white',
+						}
+					}],
+					yAxes: [{
+						stacked: true,
+						grid: {
+							color: 'rgba(255,0,0,0.1)',
+							borderColor: 'red'
+						},
+						ticks: {
+							beginAtZero: true,
+							color: 'white',
+							callback: function (label, index, labels) {
+								return label + '%';
+							}
+						},
+					}]
+				}
+			},
+
+		}
+
+		var ctx = document.getElementById('myChart');
+		new Chart(ctx, defaultConfig);
+
+		/*const ctx = document.getElementById('myChart');
 		new Chart(ctx, {
 			type: 'line',
 			data: {
@@ -110,7 +236,7 @@
 				}
 			},
 
-		});
+		});*/
 	</script>
 	{% endif %}
 	{% endif %}
