@@ -8,4 +8,5 @@ Stock Info
 ![2](https://user-images.githubusercontent.com/72306542/212752610-e331c081-f018-45fe-91e3-d49465b08121.jpg)
 
 Stock Graph
-![3](https://user-images.githubusercontent.com/72306542/212752666-c5e54ef6-7e10-4369-9692-ebc7a218e9e0.jpg)
+![image](https://user-images.githubusercontent.com/72306542/213927800-dc921415-46f0-4402-8c82-c459555162be.png)
+
