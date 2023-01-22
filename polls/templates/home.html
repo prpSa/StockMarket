@@ -44,8 +44,8 @@
 	</div>
 	<div>
 		<br>
-		<button id="0" type="button" style="border-radius: 4px;" >Daily (Monthly)</button>	
-		<button id="1" type="button" style="border-radius: 4px;" >Monthly (Cumulative)</button>
+		<button id="0" type="button" style="border-radius: 4px; padding: 10px 15px; background-color:#5CF12C" onclick="toggleDaily();" class="active" >Daily</button>	
+		<button id="1" type="button" style="border-radius: 4px; padding: 10px 15px; background-color: #2C3DF1" onclick="toggleWeekly();">Weekly</button>
 		<canvas id="myChart"></canvas>
 
 	</div>
@@ -62,14 +62,16 @@
 			datasets: [{
 			label: "Stock Daily Close Price",       
 			data: p,
+			borderColor: "#00ff00"
 		  }]
 		}
 
 		const MontlyData = {
 			labels: mdate,
 			datasets: [{
-			label: "Stock Daily Close Price",       
+			label: "Stock Weekly Close Price",       
 			data: m_price,
+			borderColor: "#084de0"
 		  }]
 		}
 
@@ -126,7 +128,7 @@
 
 		const DailyConfig = {
 			type: 'line',
-			data: DailyData,
+			data: MontlyData,
 			options: {
 				responsive: true,
 			},
@@ -176,67 +178,18 @@
 		}
 
 		var ctx = document.getElementById('myChart');
-		new Chart(ctx, defaultConfig);
+		var myc = new Chart(ctx, defaultConfig);
 
-		/*const ctx = document.getElementById('myChart');
-		new Chart(ctx, {
-			type: 'line',
-			data: {
-				labels: lab,
-				datasets: [{
-					label: 'Stock Close Price',
-					data: p,
-					hoverBackgroundColor: "rgba(232,105,90,0.8)",
-					hoverBorderColor: "orange",
-				}]
-			},
-			options: {
-				responsive: true,
-			},
-			options: {
-				plugins: {
-					legend: {
-						display: true,
-						labels: {
-							color: 'rgb(255, 255, 255)'
-						}
-					}
-				},
-				scales: {
-					y: {
-						ticks: { color: 'white', beginAtZero: true }
-					},
-					x: {
-						ticks: { color: 'white', beginAtZero: true }
-					},
-					xAxes: [{
-						stacked: true,
-						grid: {
-							color: 'rgba(255,0,0,0.1)',
-							borderColor: 'red'
-						},
-						ticks: {
-							color: 'white',
-						}
-					}],
-					yAxes: [{
-						stacked: true,
-						grid: {
-							color: 'rgba(255,0,0,0.1)',
-							borderColor: 'red'
-						},
-						ticks: {
-							beginAtZero: true,
-							color: 'white',
-							callback: function (label, index, labels) {
-								return label + '%';
-							}
-						},
-					}]
-				}
-			},
+		function toggleWeekly() {
+			myc.destroy();
+			myc = new Chart(ctx, DailyConfig);
+		}
 
-		});*/
+		function toggleDaily() {
+			myc.destroy();
+			myc = new Chart(ctx, defaultConfig);
+		}		
+
 	</script>
 	{% endif %}
 	{% endif %}
